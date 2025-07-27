@@ -23,8 +23,12 @@ export interface Game {
 //   results: Game[];
 // }
 
-const useGames = (selectedGenre: Genres | null) =>
-  useData<Game>("/games", { params: { genres: selectedGenre?.id } }, [selectedGenre?.id])
+const useGames = (selectedGenre: Genres | null , selectedPlatform: Platform | null) =>
+  useData<Game>("/games", {
+    params: {
+      genres: selectedGenre?.id,
+    parent_platforms: selectedPlatform?.id
+  } }, [selectedGenre?.id , selectedPlatform?.id])
 // {
 //   const [games, setGames] = useState<Game[]>([]);
 //   const [error, setError] = useState([]);
