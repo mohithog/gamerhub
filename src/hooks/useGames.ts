@@ -4,6 +4,7 @@
 import params from 'axios'
 import useData from "./useData";
 import { Genres } from './useGenres';
+import { GameQuery } from '../App';
 
 export interface Platform {
   id: number;
@@ -23,12 +24,12 @@ export interface Game {
 //   results: Game[];
 // }
 
-const useGames = (selectedGenre: Genres | null , selectedPlatform: Platform | null) =>
+const useGames = (gameQuery: GameQuery) =>
   useData<Game>("/games", {
     params: {
-      genres: selectedGenre?.id,
-    parent_platforms: selectedPlatform?.id
-  } }, [selectedGenre?.id , selectedPlatform?.id])
+      genres: gameQuery.genre?.id,
+    parent_platforms: gameQuery.platform?.id
+  } }, [gameQuery])
 // {
 //   const [games, setGames] = useState<Game[]>([]);
 //   const [error, setError] = useState([]);
