@@ -2,6 +2,7 @@
 // import apiClient from "../services/api-client";
 // import { CanceledError } from "axios";
 import useData from "./useData";
+import genres from "../data/genres";
 
 export interface Genres {
   id: number;
@@ -12,7 +13,10 @@ export interface Genres {
 //     count: number;
 //     results: Genres[]
 // }
-const useGenres = () => useData<Genres>("/genres");
+
+
+// const useGenres = () => useData<Genres>("/genres");
+const useGenres = () => ({ data: genres, isLoading: false, error: null });
 // {
 //   const [genres, setGenres] = useState<Genres[]>([]);
 //   const [error, setError] = useState("");
