@@ -1,9 +1,5 @@
-// import { useEffect, useState } from "react";
-// import apiClient from "../services/api-client";
-// import { CanceledError } from "axios";
-import useData, { FetchResponse } from "./useData";
 import genres from "../data/genres";
-import apiClient from "../services/api-client";
+import apiClient, { FetchResponse } from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
 export interface Genres {
