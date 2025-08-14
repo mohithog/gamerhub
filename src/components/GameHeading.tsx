@@ -1,6 +1,3 @@
-import React from "react";
-import { Genres } from "../hooks/useGenres";
-import { Platform } from "../hooks/useGames";
 import { Heading } from "@chakra-ui/react";
 import { GameQuery } from "../App";
 
