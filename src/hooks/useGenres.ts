@@ -1,22 +1,22 @@
 // import { useEffect, useState } from "react";
 // import apiClient from "../services/api-client";
 // import { CanceledError } from "axios";
-import useData from "./useData";
+import useData, { FetchResponse } from "./useData";
 import genres from "../data/genres";
+import apiClient from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 export interface Genres {
   id: number;
   name: string;
   image_background: string;
 }
-// interface FetchGenreResponse{
-//     count: number;
-//     results: Genres[]
+// interface FetchGenreResponse {
+//   count: number;
+//   results: Genres[];
 // }
 
-
 // const useGenres = () => useData<Genres>("/genres");
-const useGenres = () => ({ data: genres, isLoading: false, error: null });
 // {
 //   const [genres, setGenres] = useState<Genres[]>([]);
 //   const [error, setError] = useState("");
@@ -44,4 +44,18 @@ const useGenres = () => ({ data: genres, isLoading: false, error: null });
 
 // }
 
+//                specific hook for fetching data using a generic hook
+// const useGenres = () => ({ data: genres, isLoading: false, error: null });
+
+//                     replacing with ReactQuery
+const useGenres = () => {
+  return useQuery({
+    queryKey: ["genres"],
+    queryFn: () => apiClient
+      .get<FetchResponse<Genres>>("/genres")
+      .then((res) => res.data.results),
+    staleTime: 24 * 60 * 60 * 1000, //24h
+    initialData: genres
+  });
+};
 export default useGenres;
