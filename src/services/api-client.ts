@@ -12,10 +12,14 @@ const axiosInstance = axios.create({
   },
 });
 
-const apiClient = <T>(endpoint: string, requestConfig?: AxiosRequestConfig) => {
-  return axiosInstance
-    .get<FetchResponse<T>>(endpoint, requestConfig)
-    .then((res) => res.data.results);
-};
+class APIClient<T> {
+  endpoint: string;
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
+  getAll = (requestConfig?: AxiosRequestConfig) => {
+    return axiosInstance.get<FetchResponse<T>>(this.endpoint , requestConfig).then(res => res.data.results)
+  }
+}
 
-export default apiClient;
+export default APIClient;
